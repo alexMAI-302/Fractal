@@ -8,25 +8,17 @@ namespace ConsoleApplication7
 {
     class BinaryTree
     {
-        public string section; //элемент в узле дерева
-         
-        public BinaryTree Right;
-        public BinaryTree Left;
+        public string section;    //элемент в узле дерева
+        public BinaryTree Right;  //правый потомок
+        public BinaryTree Left;   //левый потомок
 
-        public void AdditionR()
+        public void AdditionR()             //запись в правую ветвь
         {
             this.Right = new BinaryTree();
-          
-                
         }
-        public void AdditionL()
+        public void AdditionL()             //запись в левую ветвь
         {
             this.Left = new BinaryTree();
-        
-        }
-        public void SetSection(string section)
-        {
-            this.section = section;
         }
     }
 }
