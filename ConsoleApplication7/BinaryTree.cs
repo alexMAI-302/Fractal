@@ -12,13 +12,5 @@ namespace ConsoleApplication7
         public BinaryTree Right;  //правый потомок
         public BinaryTree Left;   //левый потомок
 
-        public void AdditionR()             //запись в правую ветвь
-        {
-            this.Right = new BinaryTree();
-        }
-        public void AdditionL()             //запись в левую ветвь
-        {
-            this.Left = new BinaryTree();
-        }
     }
 }

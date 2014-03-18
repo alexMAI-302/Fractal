@@ -33,17 +33,17 @@ namespace ConsoleApplication7
 
                    if (i % 2 != 0)
                     {
-                        xy.AdditionR();
+                        xy.Right = new BinaryTree();
                         create_point(xy.Right , x + step, y, i + 1, step / 2);
-                        xy.AdditionL();
+                        xy.Left = new BinaryTree();
                         create_point(xy.Left ,  x - step, y, i + 1, step / 2);
                     }
 
                     else
                     {
-                        xy.AdditionR();
+                        xy.Right = new BinaryTree();
                         create_point(xy.Right ,x, y + step, i + 1, step / 2);
-                        xy.AdditionL();
+                        xy.Left = new BinaryTree();
                         create_point(xy.Left , x, y - step, i + 1, step / 2);
                     }
                 }
