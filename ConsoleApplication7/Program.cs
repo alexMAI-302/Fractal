@@ -11,16 +11,12 @@ namespace ConsoleApplication7
     class Program
     {
         public static int BrunchNumber = 0;  //количество ветвлений 
-        public static StreamWriter SW = new StreamWriter(new FileStream("FileName.txt", FileMode.Create, FileAccess.Write));
         
-
         public static void create_point(BinaryTree xy, double x, double y, int i, double step)
         {
             //рекурсивная функция для вычисления координат точек фрактала
 
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.AppendLine(x.ToString() + " ; " + y.ToString());              //конкатенация строк, содержащих координаты
-            xy.section = sb.ToString();                                      //запись в "лист" дерева
+            xy.section = x.ToString() + " ; " + y.ToString();  //конкатенация строк, содержащих координаты
 
             bool Flag = (i % 2 != 0);
             if (i != (BrunchNumber - 1))
@@ -32,7 +28,7 @@ namespace ConsoleApplication7
 
         
 
-        public static void PrintPoints(BinaryTree xy)
+        public static void PrintPoints(BinaryTree xy, StreamWriter SW)
         {
             //рекурсивная функция для вывода координат точек
             
@@ -41,17 +37,18 @@ namespace ConsoleApplication7
 
                 if (xy.Left != null)
                 {
-                    PrintPoints(xy.Left);
+                    PrintPoints(xy.Left, SW);
                 }
 
                 if (xy.Right != null)
                 {
-                    PrintPoints(xy.Right);
+                    PrintPoints(xy.Right, SW);
                 }
         }
 
             static void Main(string[] args)
         {
+            StreamWriter SW = new StreamWriter(new FileStream("FileName.txt", FileMode.Create, FileAccess.Write));
             System.Console.WriteLine("Программа   для  генерации   точек  фрактала,");
             System.Console.WriteLine("координаты точек  хранятся  в бинарном дереве");
             System.Console.WriteLine("---------------------------------------------");
@@ -87,7 +84,7 @@ namespace ConsoleApplication7
 
                 create_point(BT , 0, Len, 1, Len / 2);
 
-                PrintPoints(BT);
+                PrintPoints(BT, SW);
 
                 SW.Close();  // в конце вывода данных закрываем поток
             }
