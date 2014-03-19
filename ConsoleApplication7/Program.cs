@@ -10,9 +10,8 @@ namespace ConsoleApplication7
 
     class Program
     {
-        public static int BrunchNumber = 0;  //количество ветвлений 
         
-        public static void create_point(BinaryTree xy, double x, double y, int i, double step)
+        public static void create_point(BinaryTree xy, double x, double y, int i, double step, int BrunchNumber)
         {
             //рекурсивная функция для вычисления координат точек фрактала
 
@@ -21,8 +20,8 @@ namespace ConsoleApplication7
             bool Flag = (i % 2 != 0);
             if (i != (BrunchNumber - 1))
                 {
-                    create_point(xy.Right = new BinaryTree(), x + ((Flag) ? step : 0), y + ((i % 2 != 0) ? 0 : step), i + 1, step / 2);
-                    create_point(xy.Left = new BinaryTree(), x + ((Flag) ? -step : 0), y + ((i % 2 != 0) ? 0 : -step), i + 1, step / 2);  
+                    create_point(xy.Right = new BinaryTree(), x + ((Flag) ? step : 0), y + ((i % 2 != 0) ? 0 : step), i + 1, step / 2, BrunchNumber);
+                    create_point(xy.Left = new BinaryTree(), x + ((Flag) ? -step : 0), y + ((i % 2 != 0) ? 0 : -step), i + 1, step / 2, BrunchNumber);  
                 }
          }
 
@@ -75,14 +74,14 @@ namespace ConsoleApplication7
 
                 System.Console.WriteLine();
                 System.Console.WriteLine("Введите количество ветвлений фрактала:");
-                BrunchNumber = int.Parse(System.Console.ReadLine());
+                int BrunchNumber = int.Parse(System.Console.ReadLine());
 
                 System.Console.WriteLine();
                 System.Console.WriteLine("Количество ветвлений = " + BrunchNumber);
 
                 BinaryTree BT = new BinaryTree();
 
-                create_point(BT , 0, Len, 1, Len / 2);
+                create_point(BT , 0, Len, 1, Len / 2, BrunchNumber);
 
                 PrintPoints(BT, SW);
 
