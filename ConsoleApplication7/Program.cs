@@ -14,7 +14,7 @@ namespace ConsoleApplication7
         public static StreamWriter SW = new StreamWriter(new FileStream("FileName.txt", FileMode.Create, FileAccess.Write));
         
 
-        public static int create_point(BinaryTree xy, double x, double y, int i, double step)
+        public static void create_point(BinaryTree xy, double x, double y, int i, double step)
         {
             //рекурсивная функция для вычисления координат точек фрактала
 
@@ -23,19 +23,14 @@ namespace ConsoleApplication7
             xy.section = sb.ToString();                                      //запись в "лист" дерева
 
             bool Flag = (i % 2 != 0);
-
-            if (i == (BrunchNumber - 1))
+            if (i != (BrunchNumber - 1))
                 {
-                    return 0;
+                    create_point(xy.Right = new BinaryTree(), x + ((Flag) ? step : 0), y + ((i % 2 != 0) ? 0 : step), i + 1, step / 2);
+                    create_point(xy.Left = new BinaryTree(), x + ((Flag) ? -step : 0), y + ((i % 2 != 0) ? 0 : -step), i + 1, step / 2);  
                 }
+         }
 
-                else
-                {
-                   create_point(xy.Right = new BinaryTree(), x + ((Flag) ? step : 0), y + ((i % 2 != 0) ? 0 : step), i + 1, step / 2);
-                   create_point(xy.Left = new BinaryTree(), x + ((Flag) ? -step : 0), y + ((i % 2 != 0) ? 0 : -step), i + 1, step / 2);
-                }
-                return 0;
-        }
+        
 
         public static void PrintPoints(BinaryTree xy)
         {
@@ -55,8 +50,7 @@ namespace ConsoleApplication7
                 }
         }
 
-
-        static void Main(string[] args)
+            static void Main(string[] args)
         {
             System.Console.WriteLine("Программа   для  генерации   точек  фрактала,");
             System.Console.WriteLine("координаты точек  хранятся  в бинарном дереве");
