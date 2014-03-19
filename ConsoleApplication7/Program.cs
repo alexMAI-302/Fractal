@@ -29,17 +29,8 @@ namespace ConsoleApplication7
 
                 else
                 {
-                   if (i % 2 != 0)
-                    {
-                        create_point(xy.Right = new BinaryTree(), x + step, y, i + 1, step / 2);
-                        create_point(xy.Left = new BinaryTree(), x - step, y, i + 1, step / 2);
-                    }
-
-                    else
-                    {
-                        create_point(xy.Right = new BinaryTree(), x, y + step, i + 1, step / 2);
-                        create_point(xy.Left = new BinaryTree(), x, y - step, i + 1, step / 2);
-                    }
+                   create_point(xy.Right = new BinaryTree(), x + ((i % 2 != 0) ? step : 0), y + ((i % 2 != 0) ? 0 : step), i + 1, step / 2);
+                   create_point(xy.Left = new BinaryTree(), x + ((i % 2 != 0) ? - step : 0), y + ((i % 2 != 0) ? 0 : - step), i + 1, step / 2);
                 }
                 return 0;
         }
