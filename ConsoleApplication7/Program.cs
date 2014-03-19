@@ -11,8 +11,8 @@ namespace ConsoleApplication7
     class Program
     {
         public static int BrunchNumber = 0;  //количество ветвлений 
-        public static string[] point;        //вспомогательный массив
-        public static int k = 0;             //вспомогательная переменная
+        public static StreamWriter SW = new StreamWriter(new FileStream("FileName.txt", FileMode.Create, FileAccess.Write));
+        
 
         public static int create_point(BinaryTree xy, double x, double y, int i, double step)
         {
@@ -29,36 +29,27 @@ namespace ConsoleApplication7
 
                 else
                 {
-                    
-
                    if (i % 2 != 0)
                     {
-                        xy.Right = new BinaryTree();
-                        create_point(xy.Right , x + step, y, i + 1, step / 2);
-                        xy.Left = new BinaryTree();
-                        create_point(xy.Left ,  x - step, y, i + 1, step / 2);
+                        create_point(xy.Right = new BinaryTree(), x + step, y, i + 1, step / 2);
+                        create_point(xy.Left = new BinaryTree(), x - step, y, i + 1, step / 2);
                     }
 
                     else
                     {
-                        xy.Right = new BinaryTree();
-                        create_point(xy.Right ,x, y + step, i + 1, step / 2);
-                        xy.Left = new BinaryTree();
-                        create_point(xy.Left , x, y - step, i + 1, step / 2);
+                        create_point(xy.Right = new BinaryTree(), x, y + step, i + 1, step / 2);
+                        create_point(xy.Left = new BinaryTree(), x, y - step, i + 1, step / 2);
                     }
                 }
-            
                 return 0;
         }
 
         public static void PrintPoints(BinaryTree xy)
         {
             //рекурсивная функция для вывода координат точек
-
+            
+                SW.WriteLine(xy.section);                    //вывод в файл
                 System.Console.WriteLine(xy.section);        //вывод на консоль
-
-                point[k] = xy.section.ToString();            //заполнение вспомогательного массива
-                k = k + 1;
 
                 if (xy.Left != null)
                 {
@@ -107,22 +98,11 @@ namespace ConsoleApplication7
 
                 BinaryTree BT = new BinaryTree();
 
-                point = new string[(int)Math.Pow(2, BrunchNumber)];  //инициализация вспомогательного массива point
-     
                 create_point(BT , 0, Len, 1, Len / 2);
 
                 PrintPoints(BT);
 
-                
-
-                //вывод в текстовый файл из вспомогательного массива:
-                StreamWriter SW = new StreamWriter(new FileStream("FileName.txt", FileMode.Create, FileAccess.Write)); // !!! здесь вместо "FileName.txt" было name
-                for (int j = 0; j < Math.Pow(2, BrunchNumber); j++)
-                {
-                    SW.WriteLine(point[j]); 
-                }
-                    
-                SW.Close();
+                SW.Close();  // в конце вывода данных закрываем поток
             }
 
             //адекватная реакция на ошибки
