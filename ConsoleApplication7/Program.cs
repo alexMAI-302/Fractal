@@ -22,6 +22,8 @@ namespace ConsoleApplication7
             sb.AppendLine(x.ToString() + " ; " + y.ToString());              //конкатенация строк, содержащих координаты
             xy.section = sb.ToString();                                      //запись в "лист" дерева
 
+            bool Flag = (i % 2 != 0);
+
             if (i == (BrunchNumber - 1))
                 {
                     return 0;
@@ -29,8 +31,8 @@ namespace ConsoleApplication7
 
                 else
                 {
-                   create_point(xy.Right = new BinaryTree(), x + ((i % 2 != 0) ? step : 0), y + ((i % 2 != 0) ? 0 : step), i + 1, step / 2);
-                   create_point(xy.Left = new BinaryTree(), x + ((i % 2 != 0) ? - step : 0), y + ((i % 2 != 0) ? 0 : - step), i + 1, step / 2);
+                   create_point(xy.Right = new BinaryTree(), x + ((Flag) ? step : 0), y + ((i % 2 != 0) ? 0 : step), i + 1, step / 2);
+                   create_point(xy.Left = new BinaryTree(), x + ((Flag) ? -step : 0), y + ((i % 2 != 0) ? 0 : -step), i + 1, step / 2);
                 }
                 return 0;
         }
